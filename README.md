@@ -56,7 +56,7 @@ Common punctuations were first removed from their names, and they were converted
 
 We then compare the brand and model and assign similarity scores respectively. The absolute price difference is also calculated and assigned scores. The scoring function f is 
    
-   **__0.5*(name score) + 0.2*(model score) + 0.2*(brand score) + 0.1*(price score), ranges between [0,1].__** 
+   **_0.5*(name score) + 0.2*(model score) + 0.2*(brand score) + 0.1*(price score), ranges between [0,1]._** 
 
 Model scores and brand scores have default values of 0.2 and 0.0 and are assigned 1 respectively if brand matches or model (assumed to be alphanumerical characters) in one product can be found in another. Price score is 0.5 if **$10 < price difference < $50**, 1.0 if below range and 0.0 if above range. Similarity scores between one product from ‘buy’ and all products from ‘abt’ were ranked and the pair with the highest score was added into the match list if it exceeds the threshold θ1. 
 
@@ -240,6 +240,8 @@ The time complexity in this method is **O(m+n)**, with m, n being the size of ea
 
 Most matching records were put in the same block, producing high true positives (1059) and low false negatives (38), hence pair completeness is high. This was done by creating a large number of blocks, and by this most blocks having a low number of products assigned to it were able to be compared quickly and found matches. Most products that do not match with each other were able to be in different blocks, producing high true negatives. 
 
-There is still a significant number of false positives, of some product pairs with common generic properties in their name, these were placed into blocks with a rather high number of elements, such as ‘series’. However, the false positives (80392) are still much less than true negatives (1098963), hence when high true negatives added with low false negatives, the reduction ratio calculated was still rather high (reduction ratio = 1 − (tp + fp)/n = (tn + fn)/n, n=fp+fn+tp+tn). 
+There is still a significant number of false positives, of some product pairs with common generic properties in their name, these were placed into blocks with a rather high number of elements, such as ‘series’. However, the false positives (80392) are still much less than true negatives (1098963), hence when high true negatives added with low false negatives, the reduction ratio calculated was still rather high.
+
+   **_reduction ratio = 1 − (tp + fp)/n = (tn + fn)/n, n=fp+fn+tp+tn_** 
 
 To improve the performance, we can consider creating blocks with multiple n-words, price, or a combination of both. This should reduce the number of pairs in the blocks, thus speeding up the comparison. We could also examine and add the description to the blocks in addition to name and price, if exists, to improve accuracy.
