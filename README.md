@@ -23,7 +23,7 @@ All files and source codes are located in the /src folder.
 
 [Script](/src/task1a.py)
 
-Libraries Used
+**Libraries Used**
 
 ```python
 import pandas as pd
@@ -35,7 +35,7 @@ import nltk
 import re
 ```
 
-Load CSV's
+**Load CSV's**
 
 ```python
 buy_s=pd.read_csv('buy_small.csv',encoding = 'ISO-8859-1')
@@ -151,7 +151,7 @@ To improve the performance, we could first examine attributes such as descriptio
 
 [Script](/src/task1b.py)
 
-Libraries Used
+**Libraries Used**
 
 ```python
 import pandas as pd
@@ -164,7 +164,7 @@ from nltk.corpus import stopwords
 import re
 ```
 
-Load CSV's
+**Load CSV's**
 
 ```python
 task1ba_csv=open("abt_blocks.csv",'w')
