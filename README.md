@@ -6,13 +6,20 @@ In this project, two implementations of Data Linkage were carried out:
 1. Naive method
 2. Blocking method
 
-All files and source codes are located in the /scr folder.
+All files and source codes are located in the /src folder.
 
-[Link](/src)
+[Project Specification](/proj2_spec.pdf)
+[abt.csv](/src/abt.csv)
+[abt_small.csv](/src/abt_small.csv)
+[buy.csv](/src/buy.csv)
+[buy_small.csv](/src/buy_small.csv)
 
 ## Naive Method
 
 To process the two datasets, the csv’s were first imported into Pandas dataframes. The common and relevant columns are then extracted from both datasets, namely the ID, name, description and price of the products. Before data linkage can be done, pre-processing was performed on the price of the products to remove dollar signs using regular expressions. Then, each item from ‘abt_small.csv’ was used to loop with each item from ‘buy_small.csv’, to compare two items. Common punctuations were first removed from their names, and they were converted into lower case and tokenized using word_tokenize from nltk. In choosing the similarity functions between names, token-based algorithms are more suitable for string of words than edit-based. Hence, cosine_normalized_similarity was used on two strings (from the textdistance library). The similarity between the names is then computed. We also extract the brand and model from the tokenized product name, as product name is observed to appear mostly in the first position and model name in the last (if any). We then compare the brand and model and assign similarity scores respectively. The absolute price difference is also calculated and assigned scores. The scoring function f is 0.5*(name score) + 0.2*(model score) + 0.2*(brand score) + 0.1*(price score), ranges between [0,1]. Model scores and brand scores have default values of 0.2 and 0.0 and are assigned 1 respectively if brand matches or model (assumed to be alphanumerical characters) in one product can be found in another. Price score is 0.5 if $10 < price difference < $50, 1.0 if below range and 0.0 if above range. Similarity scores between one product from ‘buy’ and all products from ‘abt’ were ranked and the pair with the highest score was added into the match list if it exceeds the threshold θ1. A list was also built to filter out products of ‘abt’ that have previously in a highly similar match (similarity > θ2) to reduce duplication. If the top ‘abt’ product in the loop has previously been in a highly similar match, the second-highest match is added into the match list provided the similarity > θ2. After experimenting with different thresholds, θ1 = 0.55, and θ2 = 0.7 was found to produce the best F1 score with the most reasonable number of linked records. Then, the ID pairs in the match list were written into ‘task1a.csv’.
+
+[Script](/src/task1a.py)
+
 
 ```python
 
@@ -110,6 +117,8 @@ This product comparison algorithm yields a recall of 0.812 and precision of 0.84
 ## Blocking
 
 The two datasets ‘abt.csv’ and. ‘buy.csv’ were opened and loaded into dataframes, then important features were extracted and cleaned using regular expressions. To place each item into blocks, a for loop is used. It first gets the product name, tokenises it using the nltk library, and removes punctuations and stop words from the word list, to avoid large, meaningless blocks. Then, each word in the word list is lemmatised using WordNetLemmatizer from the nltk library, and a block is created for each word in the processed product name. Before adding into the final list, some filtering works were also done to filter out potentially large blocks with generic product names or properties. Upon examining both datasets, colours and popular brand names were found to be creating unnecessary large blocks that will make the data linkage unproductive. Hence a small list including “sony”, “black” was created to help with filtering out the blocks. Finally, we add the block key (which is the word) and the product ID into the csv file. The same process was done with both ‘abt.csv’ and. ‘buy.csv’. At the end of the code, each product was assigned to at least one block, with the block key being a component of its name.
+
+[Script](/src/task1b.py)
 
 ```python
 import pandas as pd
