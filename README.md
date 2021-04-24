@@ -8,11 +8,11 @@ In this project, two implementations of Data Linkage were carried out:
 
 All files and source codes are located in the /src folder.
 
-[Project Specification](/proj2_spec.pdf)
-[abt.csv](/src/abt.csv)
-[abt_small.csv](/src/abt_small.csv)
-[buy.csv](/src/buy.csv)
-[buy_small.csv](/src/buy_small.csv)
+[Project Specification](/proj2_spec.pdf) \n
+[abt.csv](/src/abt.csv) \n 
+[abt_small.csv](/src/abt_small.csv) \n
+[buy.csv](/src/buy.csv) \n
+[buy_small.csv](/src/buy_small.csv) \n
 
 ## Naive Method
 
