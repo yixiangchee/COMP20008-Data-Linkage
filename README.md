@@ -1,6 +1,7 @@
 # Comparison between Naive and Blocking for Data Linkage
 
 COMP20008 Project 2 Part 1: Data Linkage
+
 Marks: 11/12
 
 Abt and Buy both have product databases. In order to perform joint market research they need to link the same products in their databases. Therefore the research team has manually linked a subset of the data in order to build a linkage algorithm to automate the remaining items to be linked.
