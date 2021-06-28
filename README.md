@@ -149,7 +149,7 @@ Overall, the algorithm performed well on picking up most matches, but failed to 
 
 To improve the performance, we could first examine attributes such as description, and calculate the similarity between description strings, assigning a default value if not exists, and account into our scoring function. We could also try and average the scores with other similarity measures that work well with strings of words such as Jaccard Similarity, to pick up more similarity/differences between strings. Also, we could use the recordlinkage library to assist with linking data.
 
-
+---
 
 ## Blocking
 
